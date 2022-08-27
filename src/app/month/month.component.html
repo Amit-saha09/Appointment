@@ -1,0 +1,212 @@
+
+
+<div class="row">
+    <div class="col-md-9">
+      <form [formGroup]="form">
+        <div class="row">
+          <div class="col text-center">
+            <div class="form-group col-md-6 ">
+              <label>Month</label>
+              <select #mySelect formControlName="month"
+               (change)="onChangeMonth(mySelect.value)"
+              class="form-control">
+              <option value="" selected>Select Month</option> 
+                  <option *ngFor="let month of months"
+                  value={{month.id}}>{{month.name}}</option>
+                  
+                </select>
+            </div>
+          </div>
+          <div class="col text-right">
+            <button (click)="createClick()" class="btn btn-success">create schedule</button>
+          </div>
+        </div>
+       
+      </form>
+        <full-calendar #fullcalendar [options]="calendarOptions"></full-calendar>
+        
+    </div>
+    <div class="col-md-2">
+        
+    </div>
+</div>
+
+<div class="modal" tabindex="-1" role="dialog"  [ngStyle]="{'display':display}">
+    <div class="modal-dialog" role="document">
+          <div class="modal-content">
+                <div class="modal-header">
+                      <h4 class="modal-title">Model Title</h4>
+                      <button type="button" class="close" aria-label="Close" (click)="onCloseHandled()"><span aria-hidden="true">&times;</span></button>
+                    </div>
+                <div class="modal-body">
+                   
+                    <div *ngIf="create">
+
+                        <form [formGroup]="createform" (ngSubmit)="onSubmit()">
+     
+                            <div class="form-group row ">
+                              <label class="col-md-2">First Name</label>
+                              <input
+                                type="text"
+                                formControlName="firstName"
+                                class="form-control col-md-4"
+                                [ngClass]="{ 'is-invalid': submitted && f['firstName'].errors }"
+                              />
+                              <div *ngIf="submitted && f['firstName'].errors" class="invalid-feedback">
+                                <div *ngIf="f['firstName'].errors['required']">First name is required
+                                </div>
+                                <div *ngIf="f['firstName'].errors['maxlength']">
+                                  first name must not exceed 40 characters
+                                </div>
+                              </div>
+                              
+                            </div>
+                         
+                            <div class="form-group row">
+                              <label class="col-md-2">Last Name</label>
+                              <input
+                                type="text"
+                                formControlName="lastName"
+                                class="form-control col-md-4"
+                                [ngClass]="{ 'is-invalid': submitted && f['lastName'].errors }"
+                              />
+                              <div *ngIf="submitted && f['lastName'].errors" class="invalid-feedback">
+                                <div *ngIf="f['lastName'].errors['required']">Last name is required</div>
+                                
+                                <div *ngIf="f['lastName'].errors['maxlength']">
+                                  Last name must not exceed 40 characters
+                                </div>
+                              </div>
+                            </div>
+                            <div class="form-group row">
+                              <label class="col-md-2">Email</label>
+                              <input
+                                type="text"
+                                formControlName="email"
+                                class="form-control col-md-2"
+                                [ngClass]="{ 'is-invalid': submitted && f['email'].errors }"
+                              />
+                              <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
+                                <div *ngIf="f['email'].errors['required']">Email is required</div>
+                                <div *ngIf="f['email'].errors['email']">Email is invalid</div>
+                              </div>
+                            </div>
+                      
+                            <div class="form-group row">
+                              <label class="col-md-2">Gender</label>
+                              <select name="Gender" id="gender"  formControlName="gender"
+                              class="form-control col-md-4">
+                              <option selected disabled>Select gender</option>  
+                                  <option value="male">Male</option>
+                                  <option value="female">Female</option>
+                                  <option value="others">Others</option>
+                                </select>
+                            </div>
+                      
+                            <div class="form-group row">
+                              <label class="col-md-2">Age</label>
+                              <input
+                                type="number"
+                                min="0"
+                                formControlName="age"
+                                class="form-control col-md-4"
+                               
+                              />
+                            </div>
+                      
+                            <div class="form-group row">
+                              <label class="col-md-2">Date</label>
+                              <input
+                                type="date"
+                                formControlName="date"
+                                class="form-control col-md-4"
+                                [ngClass]="{ 'is-invalid': submitted && f['date'].errors }"
+                              />
+                              <div *ngIf="submitted && f['date'].errors" class="invalid-feedback">
+                                <div *ngIf="f['date'].errors['required']">date is required</div>
+                              </div>
+                            </div>
+                      
+                            <div class="form-group row">
+                              <label class="col-md-2">Time</label>
+                              <input
+                                type="time"
+                                formControlName="time"
+                                class="form-control col-md-2"
+                                [ngClass]="{ 'is-invalid': submitted && f['time'].errors }"
+                              />
+                              <div *ngIf="submitted && f['time'].errors" class="invalid-feedback">
+                                <div *ngIf="f['time'].errors['required']">time is required</div>
+                              </div>
+                            </div>
+                            
+                            <div class="form-group mt-2">
+                              <button type="submit" class="btn btn-primary">Create </button>
+                             
+                            </div>
+                        </form>
+                    </div>
+
+
+             </div>
+                
+                <div class="modal-footer">
+                      <button type="button" class="btn btn-default" (click)="onCloseHandled()" >Close</button>
+                </div>
+       </div>
+        </div>
+</div>
+
+
+<div class="modal" tabindex="-1" role="dialog"  [ngStyle]="{'display':display2}">
+    <div class="modal-dialog" role="document">
+          <div class="modal-content">
+                <div class="modal-header">
+                      <h4 class="modal-title">Model Title</h4>
+                      <button type="button" class="close" aria-label="Close" (click)="onCloseHandled2()"><span aria-hidden="true">&times;</span></button>
+                    </div>
+                <div class="modal-body">
+                   
+
+
+
+
+                    <div>
+                     <div class="row">
+                        <label class="col-md-2" for="">firstName:</label>
+                        <h3 class="col-md-4 textsizefont">{{schedulDetails?.firstName}}</h3>
+                      </div>
+                      <div class="row">
+                        <label class="col-md-2" for="">LastName:</label>
+                        <h3 class="col-md-4 textsizefont">{{schedulDetails?.lastName}}</h3>
+                      </div>
+                      <div class="row">
+                        <label class="col-md-2" for="">Email:</label>
+                        <h3 class="col-md-4 textsizefont">{{schedulDetails?.email}}</h3>
+                      </div>
+                      <div class="row">
+                        <label class="col-md-2" for="">Gender:</label>
+                        <h3 class="col-md-4 textsizefont">{{schedulDetails?.gender}}</h3>
+                      </div>
+                      <div class="row">
+                        <label class="col-md-2" for="">Age:</label>
+                        <h3 class="col-md-4 textsizefont">{{schedulDetails?.age}}</h3>
+                      </div>
+                      <div class="row">
+                        <label class="col-md-2" for="">Date:</label>
+                        <h3 class="col-md-4 textsizefont">{{schedulDetails?.date}}</h3>
+                      </div>
+                      <div class="row">
+                        <label class="col-md-2" for="">Time:</label>
+                        <h3 class="col-md-4 textsizefont">{{schedulDetails?.time}}</h3>
+                      </div>
+                    </div>
+             </div>
+                
+                <div class="modal-footer">
+                      <button type="button" class="btn btn-default" (click)="onCloseHandled2()" >Close</button>
+                </div>
+       </div>
+        </div>
+</div>
+

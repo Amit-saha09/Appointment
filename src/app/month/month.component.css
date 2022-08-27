@@ -1,0 +1,11 @@
+.text-right{
+    text-align: right;
+    margin-top: 5px;
+}
+
+.text-center{
+    text-align: center;
+}
+.textsizefont{
+font-size: 1rem
+}
